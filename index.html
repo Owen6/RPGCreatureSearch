@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Creature Search</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <h1>RPG Creature Search</h1>
+      <p>All creature data is retrieved from freeCodeCamp's <a href="https://rpg-creature-api.freecodecamp.rocks/">RPG Creature API</a></p>
+      <p>Enter a valid creature name or id to load it's stats.</p>
+    </header>
+    <main>
+      <input type="text" id="search-input">
+      <button id="search-button">Search</button>
+      <div id="creature-stats" class="creature-stats">
+        <span id="creature-name" class="stat">temp-name</span>
+        <span id="creature-id" class="stat">temp-id</span>
+        <span id="weight" class="stat">temp-wt</span>
+        <span id="height" class="stat">temp-ht</span>
+        <span id="types" class="stat">temp-type</span>
+        <span id="hp" class="stat">temp-hp</span>
+        <span id="attack" class="stat">temp-atk</span>
+        <span id="defense" class="stat">temp-def</span>
+        <span id="special-attack" class="stat">temp-spAtk</span>
+        <span id="special-defense" class="stat">temp-spDef</span>
+        <span id="speed" class="stat">temp-speed</span>
+      </div>
+      <p><br> { id: 1,
+    name: 'Pyrolynx',
+    weight: 42,
+    height: 32,
+    special: 
+     { name: 'Blazing Reflex',
+       description: 'Increases speed when hit by a Fire-type move.' },
+    stats: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+    types: [ [Object] ] },</p>
+    </main>
+  </body>
+  <script src="script.js"></script>
+</html>
