@@ -14,7 +14,7 @@
       <p>Enter a valid creature name or id to load it's stats.</p>
     </header>
     <main>
-      <input type="text" id="search-input">
+      <input type="text" id="search-input" required>
       <button id="search-button">Search</button>
       <div id="creature-stats" class="creature-stats">
         <span id="creature-name" class="stat">temp-name</span>
@@ -29,15 +29,6 @@
         <span id="special-defense" class="stat">temp-spDef</span>
         <span id="speed" class="stat">temp-speed</span>
       </div>
-      <p><br> { id: 1,
-    name: 'Pyrolynx',
-    weight: 42,
-    height: 32,
-    special: 
-     { name: 'Blazing Reflex',
-       description: 'Increases speed when hit by a Fire-type move.' },
-    stats: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
-    types: [ [Object] ] },</p>
     </main>
   </body>
   <script src="script.js"></script>

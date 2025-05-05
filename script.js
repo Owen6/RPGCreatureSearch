@@ -2,36 +2,32 @@ const validCreatureURL = "https://rpg-creature-api.freecodecamp.rocks/api/creatu
 //https://rpg-creature-api.freecodecamp.rocks/api/creature/{name-or-id}
 const creatureInfoURL = "https://rpg-creature-api.freecodecamp.rocks/api/creature/";
 
+const searchInput = document.getElementById("search-input");
+const searchBtn = document.getElementById("search-button");
 const creatureStatsSpans = document.querySelectorAll(".stat");
-
-let stats = [];
+const creatureSpanMap = {};
+let creatures = [];
 let loaded = false;
 
 
-/**
+//console.log(creatureStatsSpans);
+
+//set creatureSpansMap so keys are id's instead of numbers for better accessibility.
 creatureStatsSpans.forEach((span) => {
-  console.log(span.id);
-  console.log(span.innerText);
+  //console.log(span.id);
+  //console.log(span.innerText);
+  if(span.id){
+    creatureSpanMap[span.id] = span;
+  }
 })
-*/
+
+//console.log(creatureSpanMap)
+
 
 
 window.onload = async () => {
-  /** 
-  fetch(validCreatureURL)
-    .then((res) => res.json())
-    .then((data) => {
-      stats = data;
-    })
-    .catch((err) => {
-      alert(`Error Occured: ${err}`)
-    });
-  
-  */
-  stats = await fetchData();
-  //console.log(stats)
-  //loadData(stats[0]);
-  //bigchungus
+  creatures = await fetchData();
+  searchBtn.addEventListener("click", searchCreatures);
 }
 
 const fetchData = async (link=validCreatureURL) => {
@@ -46,38 +42,55 @@ const fetchData = async (link=validCreatureURL) => {
 };
 
 const loadData = async (obj) => {
-  const data = await fetchData(`${creatureInfoURL}${obj.id}`)
-  console.log(data)
+  creatureSpanMap["types"].innerHTML = ``;
+  const data = await fetchData(`${creatureInfoURL}${obj.id}`);
+  console.log(data);
+  //make name capital
+  creatureSpanMap["creature-name"].textContent = data.name.toUpperCase();
+  creatureSpanMap["creature-id"].textContent = data.id;
+  creatureSpanMap["weight"].textContent = data.weight;
+  creatureSpanMap["height"].textContent = data.height;
+  data.types.forEach((type) => {
+    //make capital
+    creatureSpanMap["types"].innerHTML += `<div>${type.name.toUpperCase()}</div>`;
+  })
+  data.stats.forEach((stat) => {
+    creatureSpanMap[stat.name].textContent = stat.base_stat;
+  })
+  /*
+  creatureSpanMap["hp"].textContent = data.stats;
+  creatureSpanMap["attack"].textContent = 'test';
+  creatureSpanMap["defense"].textContent = 'test';
+  creatureSpanMap["special-attack"].textContent = 'test';
+  creatureSpanMap["special-defense"].textContent = 'test';
+  creatureSpanMap["speed"].textContent = 'test';
+  */
 }
 
-/**
-const fetchData = async () => {
-  try {
-    const res = await fetch(validCreatureURL);
-    const data = await res.json();
-    //console.log(data);
-    const creaturesStats = await Promise.all(data.map(async (obj) => {
-      
-      const res2 = await fetch(`https://rpg-creature-api.freecodecamp.rocks/api/creature/${obj.id}`);
-      const data2 = await res2.json();
-      //console.log(data2);
-      
-      return data2
-    }))
 
-    //const stats = await Promise.all(creaturesStats);
-    console.log(creaturesStats);
-    //console.log(data);
-    /** 
-    creatures = data;
-    console.log(creatures);
-    data.forEach((obj) => {
-      creatures.push([obj,validCreatureURL+obj.id])
-    });
-    
-  } catch (err) {
-    console.log(err);
+const searchCreatures = () => {
+  //console.log(searchInput.value);
+  if(creatures.length === 0){
+    alert("Please wait a second more for the data to load.");
+    return;
+  }else{
+    /**creatures.forEach((obj)=>{
+      if(searchInput.value === obj.name){
+        console.log("create function to pull information and call before return");
+        return
+      }else{
+
+      }
+    })
+    */
+    for(const obj of creatures){
+      if(searchInput.value === obj.name || parseInt(searchInput.value) === obj.id){
+        //console.log("create function to pull information and call before return");
+        loadData(obj)
+        return
+      }
+    }
+    alert("Creature not found");
   }
+}
 
-};
-*/
