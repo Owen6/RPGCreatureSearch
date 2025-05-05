@@ -1,4 +1,4 @@
-const validCreatureURL = "https://rpg-creature-api.freecodecamp.rocks/api/creatures";
+//const validCreatureURL = "https://rpg-creature-api.freecodecamp.rocks/api/creatures";
 //https://rpg-creature-api.freecodecamp.rocks/api/creature/{name-or-id}
 const creatureInfoURL = "https://rpg-creature-api.freecodecamp.rocks/api/creature/";
 
@@ -23,74 +23,72 @@ creatureStatsSpans.forEach((span) => {
 
 //console.log(creatureSpanMap)
 
-
-
-window.onload = async () => {
-  creatures = await fetchData();
+window.onload = () => {
+  //creatures = await fetchData();
   searchBtn.addEventListener("click", searchCreatures);
 }
 
-const fetchData = async (link=validCreatureURL) => {
+const fetchData = async (input) => {
   try {
-    const res = await fetch(link);
+    const res = await fetch(`${creatureInfoURL}${input}`);
     const data = await res.json();
     //console.log(data);
     return data;
   } catch (err) {
     console.log(err);
+    alert("Creature not found");
   }
 };
 
-const loadData = async (obj) => {
-  creatureSpanMap["types"].innerHTML = ``;
-  const data = await fetchData(`${creatureInfoURL}${obj.id}`);
-  console.log(data);
-  //make name capital
+const clearStats = () => {
+  Object.entries(creatureSpanMap).forEach(([id,span]) => {
+    if(id === "types"){
+      span.innerHTML = ``;
+    }else{
+      span.textContent = ``;
+    }
+  })
+}
+
+const loadData = async (data) => {
+  
+  //const data = await fetchData(`${creatureInfoURL}${obj.id}`);
+  //console.log(data);
+
   creatureSpanMap["creature-name"].textContent = data.name.toUpperCase();
-  creatureSpanMap["creature-id"].textContent = data.id;
-  creatureSpanMap["weight"].textContent = data.weight;
-  creatureSpanMap["height"].textContent = data.height;
+  creatureSpanMap["creature-id"].textContent = `#${data.id}`;
+  creatureSpanMap["weight"].textContent = `Weight: ${data.weight}`;
+  creatureSpanMap["height"].textContent = `Height: ${data.height}`;
   data.types.forEach((type) => {
-    //make capital
     creatureSpanMap["types"].innerHTML += `<div>${type.name.toUpperCase()}</div>`;
   })
   data.stats.forEach((stat) => {
     creatureSpanMap[stat.name].textContent = stat.base_stat;
   })
-  /*
-  creatureSpanMap["hp"].textContent = data.stats;
-  creatureSpanMap["attack"].textContent = 'test';
-  creatureSpanMap["defense"].textContent = 'test';
-  creatureSpanMap["special-attack"].textContent = 'test';
-  creatureSpanMap["special-defense"].textContent = 'test';
-  creatureSpanMap["speed"].textContent = 'test';
-  */
 }
 
 
-const searchCreatures = () => {
-  //console.log(searchInput.value);
-  if(creatures.length === 0){
-    alert("Please wait a second more for the data to load.");
-    return;
-  }else{
-    /**creatures.forEach((obj)=>{
-      if(searchInput.value === obj.name){
-        console.log("create function to pull information and call before return");
-        return
-      }else{
+const searchCreatures = async () => {
+  clearStats();
+  //const numInput = parseInt(input);
 
-      }
-    })
-    */
-    for(const obj of creatures){
-      if(searchInput.value === obj.name || parseInt(searchInput.value) === obj.id){
-        //console.log("create function to pull information and call before return");
-        loadData(obj)
-        return
-      }
+  const data = await fetchData(searchInput.value);
+  if(data) {
+    loadData(data);
+  }
+  /**
+  let notFound = true;
+  //only use of creatures
+  for(const obj of creatures){
+    if(searchInput.value === obj.name || parseInt(searchInput.value) === obj.id){
+      notFound = false;
+      loadData(obj);
     }
+  }
+  if(notFound){
+    clearStats();
     alert("Creature not found");
   }
+  */
 }
 
