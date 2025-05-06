@@ -3,9 +3,200 @@
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
+  --beige: #EDE8D0;
+  --blue: #355C7D;
+  --purple: #6C5B7B;
+  --peach: #F8B195;
+  --dusk: #C06C84;
+  --pink: #F67280;
 }
   
 html {
   box-sizing: border-box;
-  font-family: "Times New Roman";
+  font-family: "Arial";
+  width: 100%;
+  height: 100%;
+  background-color: var(--beige);
+  color: var(--blue);
+}
+
+body {
+  height: 100vh;
+  padding-bottom: 5%;
+  border: 10px solid #A0B4C6;
+}
+
+header {
+  height: 20%;
+  text-align: center;
+  padding-top: 3%;
+  margin-bottom: 3%;
+  font-size: 1.5em;
+}
+
+header h1, header p {
+  margin-bottom: 1%;
+}
+
+main {
+  display: flex;
+  width: 70%;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--blue);
+  color: var(--peach);
+  border: 8px solid var(--pink);
+  border-radius:50px;
+}
+
+/*
+.stat, .stat-label {
+  font-size: 1.3rem;
+}
+*/
+
+button {
+  width: 4em;
+  padding: 1%;
+  font-size: 2em;
+  background-color: var(--blue);
+  color: var(--beige);
+  border: 2px solid var(--beige);
+}
+
+button:hover {
+  border: 2px solid var(--peach);
+}
+
+input {
+  width: 45%;
+  margin: 4%;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--blue);
+  border: 5px solid var(--dusk);
+  border-radius: 15px;
+}
+
+.stat {
+  color: white;
+  text-align: right;
+}
+
+.creature-stats, .attributes {
+  width: 75%;
+  margin: 3%;
+  padding: 2%;
+  font-size: 1.5em;
+  background-color: var(--purple);
+  border-radius: 8px;
+}
+
+.creature-stats {
+  border: 5px solid var(--dusk);
+}
+
+.attributes {
+  border: 5px solid var(--pink);
+}
+
+.top-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.types{
+  display: flex;
+  justify-content: end;
+  width: 50%;
+}
+
+.type{
+  width: 49%;
+  font-size: 1.2rem;
+  border: 1px solid var(--beige);
+  padding: 10px;
+  margin-right: 1%;
+  text-align: center;
+}
+
+.fire {
+  background-color: #FF6F59;
+  color: white;
+}
+
+.water {
+  background-color: #4F9DAD;
+  color: white;
+}
+
+.rock {
+  background-color: #B8A18A;
+  color: #1F1F1F;
+}
+
+.electric {
+  background-color: #FBC02D;
+  color: #1F1F1F;
+}
+
+.dragon {
+  background-color: #8860D0;
+  color: white;
+}
+
+.grass {
+  background-color: #88B04B;
+  color: #1F1F1F;
+}
+
+.poison {
+  background-color: #A056A2;
+  color: white;
+}
+
+.ice {
+  background-color: #BEE9E8;
+  color: #1F1F1F;
+}
+
+.fairy {
+  background-color: #F7C6D9;
+  color: #1F1F1F;
+}
+
+.ground {
+  background-color: #D6A77A;
+  color: #1F1F1F;
+}
+
+.flying {
+  background-color: #9FC9EB;
+  color: #1F1F1F;
+}
+
+.bug {
+  background-color: #A8C686;
+  color: #1F1F1F;
+}
+
+.dark {
+  background-color: #4B3F3F;
+  color: white;
+}
+
+.psychic {
+  background-color: #E88EBE;
+  color: #1F1F1F;
+}
+
+.steel {
+  background-color: #C0C0C0;
+  color: #1F1F1F;
+}
+
+.ghost {
+  background-color: #7F8DAA;
+  color: white;
 }
